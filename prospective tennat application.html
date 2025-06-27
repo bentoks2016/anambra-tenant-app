@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prospective Tenant Application - Anambra State</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to start for longer forms */
+            min-height: 100vh;
+            padding: 2rem 0; /* Add padding top/bottom */
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 1rem; /* Rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            max-width: 900px; /* Max width for wider screens */
+            width: 95%; /* Responsive width */
+            padding: 2.5rem; /* Increased padding */
+            animation: fadeIn 0.8s ease-out; /* Simple fade-in animation */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        input[type="file"], /* Added file input styling */
+        select,
+        textarea {
+            border: 1px solid #d1d5db; /* Light gray border */
+            border-radius: 0.5rem; /* Rounded corners for inputs */
+            padding: 0.75rem 1rem; /* Comfortable padding */
+            width: 100%;
+            transition: all 0.2s ease-in-out;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus, /* Added file input focus styling */
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb; /* Blue border on focus */
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Soft focus ring */
+            outline: none;
+        }
+        label {
+            font-weight: 500; /* Medium font weight */
+            color: #374151; /* Darker gray for labels */
+            margin-bottom: 0.5rem;
+            display: block; /* Ensure labels are block level */
+        }
+        .form-group {
+            margin-bottom: 1.5rem; /* Spacing between form groups */
+        }
+        .section-title {
+            font-size: 1.75rem; /* Larger title */
+            font-weight: 700; /* Bold */
+            color: #1f2937; /* Even darker gray */
+            margin-bottom: 1.75rem; /* More space after title */
+            text-align: center;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb; /* Subtle separator */
+        }
+        .submit-button {
+            background-image: linear-gradient(to right, #4ade80, #16a34a); /* Green gradient */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(22, 163, 74, 0.3); /* Green shadow */
+            cursor: pointer;
+            width: 100%; /* Full width button */
+        }
+        .submit-button:hover {
+            transform: translateY(-3px); /* Lift effect on hover */
+            box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+        }
+        .grid-cols-1-md-2 {
+            display: grid;
+            gap: 1.5rem; /* Gap between grid items */
+        }
+        @media (min-width: 768px) {
+            .grid-cols-1-md-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        /* Message box styling */
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8f8f8;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .message-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .message-box button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .message-box button:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">Prospective Tenant Application Form</h1>
+        <p class="text-center text-gray-600 mb-8">Please fill out this form completely to help us find you the perfect property in Anambra State.</p>
+
+        <!-- The 'action' attribute will be updated with your Google Apps Script Web App URL -->
+        <form id="tenantApplicationForm" action="https://script.google.com/macros/s/AKfycbzVy52rcVJuxs82T0N_CHekl5dTA-EME9InEHWPOfqsMiBsKDsMW7CxhvQURS0XCvpjpg/exec" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <!-- IMPORTANT: This hidden input is crucial for Google Apps Script to identify the form submission -->
+            <input type="hidden" name="formName" value="tenantApplication">
+
+            <!-- Personal Information Section -->
+            <div class="form-section">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Personal Information</h2>
+                <div class="grid-cols-1-md-2">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required class="block">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="e.g., +2348012345678" required class="block">
+                    </div>
+                </div>
+                <div class="grid-cols-1-md-2">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required class="block">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required class="block">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="currentAddress">Current Residential Address</label>
+                    <input type="text" id="currentAddress" name="currentAddress" placeholder="Street Address, City, State, Country" required class="block">
+                </div>
+                <div class="grid-cols-1-md-2">
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required class="block">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="maritalStatus">Marital Status</label>
+                        <select id="maritalStatus" name="maritalStatus" required class="block">
+                            <option value="">Select Status</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid-cols-1-md-2">
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation" placeholder="Your Profession" required class="block">
+                    </div>
+                    <div class="form-group">
+                        <label for="officeAddress">Office/Occupation Address</label>
+                        <input type="text" id="officeAddress" name="officeAddress" placeholder="Employer's Address or Business Address" required class="block">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information Section -->
+            <div class="form-section pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Additional Information</h2>
+                <div class="grid-cols-1-md-2">
+                    <div class="form-group">
+                        <label for="numAdults">Number of Adults that will be living in the accomodation?</label>
+                        <input type="number" id="numAdults" name="numAdults" placeholder="e.g., 2" min="0" required class="block">
+                    </div>
+                    <div class="form-group">
+                        <label for="numChildren">Number of Children that will be living in the accomodation</label>
+                        <input type="number" id="numChildren" name="numChildren" placeholder="e.g., 0" min="0" class="block">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pets">Do you have any pets?</label>
+                    <select id="pets" name="pets" class="block">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Any other specific information that the landlord should be aware of?</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="e.g., 'Need a property with a garage' or 'Quiet neighborhood preferred'" class="block"></textarea>
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <div class="form-section pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">References (Minimum 2)</h2>
+                <p class="text-gray-600 mb-4">Please provide details for at least two professional or personal references (not family members).</p>
+
+                <!-- Reference 1 -->
+                <div class="mb-6 p-4 border rounded-lg bg-gray-50">
+                    <h3 class="text-xl font-medium text-gray-700 mb-3">Reference 1</h3>
+                    <div class="grid-cols-1-md-2">
+                        <div class="form-group">
+                            <label for="ref1Name">Full Name</label>
+                            <input type="text" id="ref1Name" name="ref1Name" placeholder="Reference's Full Name" required class="block">
+                        </div>
+                        <div class="form-group">
+                            <label for="ref1Phone">Phone Number</label>
+                            <input type="tel" id="ref1Phone" name="ref1Phone" placeholder="e.g., +234XXXXXXXXXX" required class="block">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ref1Address">Address</label>
+                        <input type="text" id="ref1Address" name="ref1Address" placeholder="Reference's Address" required class="block">
+                    </div>
+                </div>
+
+                <!-- Reference 2 -->
+                <div class="mb-6 p-4 border rounded-lg bg-gray-50">
+                    <h3 class="text-xl font-medium text-gray-700 mb-3">Reference 2</h3>
+                    <div class="grid-cols-1-md-2">
+                        <div class="form-group">
+                            <label for="ref2Name">Full Name</label>
+                            <input type="text" id="ref2Name" name="ref2Name" placeholder="Reference's Full Name" required class="block">
+                        </div>
+                        <div class="form-group">
+                            <label for="ref2Phone">Phone Number</label>
+                            <input type="tel" id="ref2Phone" name="ref2Phone" placeholder="e.g., +234XXXXXXXXXX" required class="block">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ref2Address">Address</label>
+                        <input type="text" id="ref2Address" name="ref2Address" placeholder="Reference's Address" required class="block">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Upload Section -->
+            <div class="form-section pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Document Uploads</h2>
+                <p class="text-gray-600 mb-4">Please upload your Proof of Identification. This is a mandatory requirement.</p>
+                <div class="form-group">
+                    <label for="proofOfId">Proof of Identification (e.g., National ID, Driver's License, Passport)</label>
+                    <input type="file" id="proofOfId" name="proofOfId" accept=".pdf,.doc,.docx,.jpg,.png" required class="block">
+                    <p class="text-sm text-gray-500 mt-1">Accepted formats: PDF, Word, JPG, PNG</p>
+                </div>
+            </div>
+
+            <!-- Declaration -->
+            <div class="form-section pt-8">
+                <div class="form-group flex items-center">
+                    <input type="checkbox" id="declaration" name="declaration" required class="mr-3 rounded-sm border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                    <label for="declaration" class="text-gray-700 font-normal">I certify that the information provided above is true and accurate to the best of my knowledge.</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group mt-8">
+                <button type="submit" class="submit-button">Submit Application</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Message Box for success/error -->
+    <div id="messageBox" class="message-box">
+        <p id="messageText"></p>
+        <button onclick="document.getElementById('messageBox').classList.remove('show');">OK</button>
+    </div>
+
+    <script>
+        document.getElementById('tenantApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+
+            // Show a temporary loading message (optional)
+            messageText.innerText = 'Submitting your application... Please wait.';
+            messageBox.classList.add('show');
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' // Use 'no-cors' as Apps Script might not send CORS headers
+            })
+            .then(response => {
+                // Since we use 'no-cors', we can't directly read the response.
+                // Assume success if no network error, or handle via Apps Script redirect
+                messageText.innerText = 'Application submitted successfully! We will get back to you soon.';
+                messageBox.classList.add('show');
+                form.reset(); // Clear the form after submission
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                messageText.innerText = 'There was an error submitting your application. Please try again.';
+                messageBox.classList.add('show');
+            });
+        });
+    </script>
+</body>
+</html>
