@@ -16,15 +16,18 @@
             align-items: flex-start; /* Align to start for longer forms */
             min-height: 100vh;
             padding: 2rem 0; /* Add padding top/bottom */
+            box-sizing: border-box; /* Ensure padding doesn't add to total width/height */
         }
         .container {
             background-color: #ffffff;
             border-radius: 1rem; /* Rounded corners */
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
             max-width: 900px; /* Max width for wider screens */
-            width: 95%; /* Responsive width */
+            width: 95%; /* Responsive width: will take 95% of parent width */
             padding: 2.5rem; /* Increased padding */
             animation: fadeIn 0.8s ease-out; /* Simple fade-in animation */
+            margin-left: auto; /* Center container horizontally */
+            margin-right: auto; /* Center container horizontally */
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -35,21 +38,22 @@
         input[type="tel"],
         input[type="date"],
         input[type="number"],
-        input[type="file"], /* Added file input styling */
+        input[type="file"],
         select,
         textarea {
             border: 1px solid #d1d5db; /* Light gray border */
             border-radius: 0.5rem; /* Rounded corners for inputs */
             padding: 0.75rem 1rem; /* Comfortable padding */
-            width: 100%;
+            width: 100%; /* Ensures inputs fill their available space */
             transition: all 0.2s ease-in-out;
+            box-sizing: border-box; /* Include padding in element's total width */
         }
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="tel"]:focus,
         input[type="date"]:focus,
         input[type="number"]:focus,
-        input[type="file"]:focus, /* Added file input focus styling */
+        input[type="file"]:focus,
         select:focus,
         textarea:focus {
             border-color: #2563eb; /* Blue border on focus */
@@ -60,7 +64,7 @@
             font-weight: 500; /* Medium font weight */
             color: #374151; /* Darker gray for labels */
             margin-bottom: 0.5rem;
-            display: block; /* Ensure labels are block level */
+            display: block; /* Ensure labels are block level, pushing input to next line */
         }
         .form-group {
             margin-bottom: 1.5rem; /* Spacing between form groups */
@@ -93,10 +97,13 @@
         .grid-cols-1-md-2 {
             display: grid;
             gap: 1.5rem; /* Gap between grid items */
+            /* Default to 1 column on small screens */
+            grid-template-columns: 1fr;
         }
+        /* Media query for medium screens and up (md breakpoint in Tailwind is 768px) */
         @media (min-width: 768px) {
             .grid-cols-1-md-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on larger screens */
             }
         }
         /* Message box styling */
@@ -210,11 +217,11 @@
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">Additional Information</h2>
                 <div class="grid-cols-1-md-2">
                     <div class="form-group">
-                        <label for="numAdults">Number of Adults that will be living in the accomodation?</label>
+                        <label for="numAdults">Number of Adults</label>
                         <input type="number" id="numAdults" name="numAdults" placeholder="e.g., 2" min="0" required class="block">
                     </div>
                     <div class="form-group">
-                        <label for="numChildren">Number of Children that will be living in the accomodation</label>
+                        <label for="numChildren">Number of Children</label>
                         <input type="number" id="numChildren" name="numChildren" placeholder="e.g., 0" min="0" class="block">
                     </div>
                 </div>
@@ -226,7 +233,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="comments">Any other specific information that the landlord should be aware of?</label>
+                    <label for="comments">Any specific requirements or comments?</label>
                     <textarea id="comments" name="comments" rows="4" placeholder="e.g., 'Need a property with a garage' or 'Quiet neighborhood preferred'" class="block"></textarea>
                 </div>
             </div>
